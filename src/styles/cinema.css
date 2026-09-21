@@ -1,0 +1,333 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* HAUTE VITESSE - LUXURY CINEMATIC EDITORIAL DESIGN SYSTEM */
+
+:root {
+  --bg-primary: #050608;
+  --bg-surface: rgba(18, 20, 26, 0.22);
+  --bg-surface-elevated: rgba(26, 29, 38, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(212, 175, 55, 0.35);
+  --accent-gold: #d4af37;
+  --accent-gold-light: #f3e5ab;
+  --accent-laser-blue: #00b4d8;
+  --accent-m-red: #ff3344;
+  --accent-m-blue: #0066b1;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.45);
+  --font-serif: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  width: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #050608;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.6);
+}
+
+/* Film Grain Texture */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Cinemascope Letterbox Bars (2.39:1 Aspect Frame) */
+.letterbox-bar-top,
+.letterbox-bar-bottom {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 0px;
+  background: #000000;
+  z-index: 80;
+  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.letterbox-bar-top { top: 0; }
+.letterbox-bar-bottom { bottom: 0; }
+.cinemascope-active .letterbox-bar-top,
+.cinemascope-active .letterbox-bar-bottom {
+  height: 48px;
+}
+
+/* Vignette & Ambient Glow */
+.cinematic-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  background: radial-gradient(circle at center, transparent 40%, rgba(3, 4, 6, 0.75) 100%);
+}
+
+/* Typography styles */
+.font-cinzel {
+  font-family: var(--font-serif);
+}
+.font-cormorant {
+  font-family: var(--font-editorial);
+}
+.font-syne {
+  font-family: var(--font-display);
+}
+
+.editorial-tag {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.editorial-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6.5vw, 6.8rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.editorial-quote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.editorial-body {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* Luxury Glassmorphic container */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.glass-pill {
+  background: rgba(15, 17, 23, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+/* Pulsing radar hotspot for Scene 5 (Exploded CAD view) */
+.hotspot-beacon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 30;
+}
+.hotspot-inner {
+  width: 14px;
+  height: 14px;
+  background-color: var(--accent-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--accent-gold);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.hotspot-beacon:hover .hotspot-inner {
+  transform: scale(1.4);
+  background-color: #ffffff;
+}
+.hotspot-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--accent-gold);
+  border-radius: 50%;
+  animation: radar-pulse 2.2s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+@keyframes radar-pulse {
+  0% {
+    width: 14px;
+    height: 14px;
+    opacity: 1;
+  }
+  100% {
+    width: 52px;
+    height: 52px;
+    opacity: 0;
+  }
+}
+
+/* Audio Visualizer Bars */
+.sound-bars-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+  width: 22px;
+}
+.sound-bar {
+  width: 3px;
+  background-color: var(--accent-gold);
+  border-radius: 2px;
+  animation: bounceBar 1.2s ease-in-out infinite alternate;
+}
+.sound-bar:nth-child(1) { height: 35%; animation-delay: 0.1s; }
+.sound-bar:nth-child(2) { height: 90%; animation-delay: 0.3s; }
+.sound-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+.sound-bar:nth-child(4) { height: 100%; animation-delay: 0.45s; }
+.sound-bar.paused {
+  animation: none;
+  height: 3px !important;
+  opacity: 0.4;
+}
+@keyframes bounceBar {
+  0% { height: 20%; }
+  50% { height: 100%; }
+  100% { height: 40%; }
+}
+
+/* Gold shimmer button */
+.btn-gold-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+  color: #000;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  padding: 16px 36px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+}
+.btn-gold-shimmer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(212, 175, 55, 0.45);
+}
+.btn-gold-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: 0.75s ease;
+}
+.btn-gold-shimmer:hover::after {
+  left: 140%;
+}
+
+/* Secondary outline button */
+.btn-outline-luxury {
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  padding: 15px 32px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+.btn-outline-luxury:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* Scroll indicator line pulse */
+@keyframes scrollLineGrow {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  50.1% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.scroll-line-indicator {
+  animation: scrollLineGrow 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Text Mask with Video Background for Scene 7 */
+.text-mask-manifesto {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Utility classes */
+.blur-glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@media (max-width: 768px) {
+  .cinemascope-active .letterbox-bar-top,
+  .cinemascope-active .letterbox-bar-bottom {
+    height: 24px;
+  }
+}
